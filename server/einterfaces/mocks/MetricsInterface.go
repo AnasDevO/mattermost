@@ -28,6 +28,11 @@ func (_m *MetricsInterface) AddMemCacheMissCounter(cacheName string, amount floa
 	_m.Called(cacheName, amount)
 }
 
+// ClearMobileClientSessionMetadata provides a mock function with given fields:
+func (_m *MetricsInterface) ClearMobileClientSessionMetadata() {
+	_m.Called()
+}
+
 // DecrementHTTPWebSockets provides a mock function with given fields: originClient
 func (_m *MetricsInterface) DecrementHTTPWebSockets(originClient string) {
 	_m.Called(originClient)
@@ -323,9 +328,9 @@ func (_m *MetricsInterface) ObserveClientLargestContentfulPaint(platform string,
 	_m.Called(platform, agent, region, elapsed)
 }
 
-// ObserveClientPageLoadDuration provides a mock function with given fields: platform, agent, elapsed
-func (_m *MetricsInterface) ObserveClientPageLoadDuration(platform string, agent string, elapsed float64) {
-	_m.Called(platform, agent, elapsed)
+// ObserveClientPageLoadDuration provides a mock function with given fields: platform, agent, userID, elapsed
+func (_m *MetricsInterface) ObserveClientPageLoadDuration(platform string, agent string, userID string, elapsed float64) {
+	_m.Called(platform, agent, userID, elapsed)
 }
 
 // ObserveClientRHSLoadDuration provides a mock function with given fields: platform, agent, elapsed
@@ -333,19 +338,44 @@ func (_m *MetricsInterface) ObserveClientRHSLoadDuration(platform string, agent 
 	_m.Called(platform, agent, elapsed)
 }
 
+// ObserveClientSplashScreenEnd provides a mock function with given fields: platform, agent, pageType, userID, elapsed
+func (_m *MetricsInterface) ObserveClientSplashScreenEnd(platform string, agent string, pageType string, userID string, elapsed float64) {
+	_m.Called(platform, agent, pageType, userID, elapsed)
+}
+
 // ObserveClientTeamSwitchDuration provides a mock function with given fields: platform, agent, fresh, elapsed
 func (_m *MetricsInterface) ObserveClientTeamSwitchDuration(platform string, agent string, fresh string, elapsed float64) {
 	_m.Called(platform, agent, fresh, elapsed)
 }
 
-// ObserveClientTimeToFirstByte provides a mock function with given fields: platform, agent, elapsed
-func (_m *MetricsInterface) ObserveClientTimeToFirstByte(platform string, agent string, elapsed float64) {
-	_m.Called(platform, agent, elapsed)
+// ObserveClientTimeToDomInteractive provides a mock function with given fields: platform, agent, userID, elapsed
+func (_m *MetricsInterface) ObserveClientTimeToDomInteractive(platform string, agent string, userID string, elapsed float64) {
+	_m.Called(platform, agent, userID, elapsed)
+}
+
+// ObserveClientTimeToFirstByte provides a mock function with given fields: platform, agent, userID, elapsed
+func (_m *MetricsInterface) ObserveClientTimeToFirstByte(platform string, agent string, userID string, elapsed float64) {
+	_m.Called(platform, agent, userID, elapsed)
+}
+
+// ObserveClientTimeToLastByte provides a mock function with given fields: platform, agent, userID, elapsed
+func (_m *MetricsInterface) ObserveClientTimeToLastByte(platform string, agent string, userID string, elapsed float64) {
+	_m.Called(platform, agent, userID, elapsed)
 }
 
 // ObserveClusterRequestDuration provides a mock function with given fields: elapsed
 func (_m *MetricsInterface) ObserveClusterRequestDuration(elapsed float64) {
 	_m.Called(elapsed)
+}
+
+// ObserveDesktopCpuUsage provides a mock function with given fields: platform, version, process, usage
+func (_m *MetricsInterface) ObserveDesktopCpuUsage(platform string, version string, process string, usage float64) {
+	_m.Called(platform, version, process, usage)
+}
+
+// ObserveDesktopMemoryUsage provides a mock function with given fields: platform, version, process, usage
+func (_m *MetricsInterface) ObserveDesktopMemoryUsage(platform string, version string, process string, usage float64) {
+	_m.Called(platform, version, process, usage)
 }
 
 // ObserveEnabledUsers provides a mock function with given fields: users
@@ -371,6 +401,11 @@ func (_m *MetricsInterface) ObserveMobileClientChannelSwitchDuration(platform st
 // ObserveMobileClientLoadDuration provides a mock function with given fields: platform, elapsed
 func (_m *MetricsInterface) ObserveMobileClientLoadDuration(platform string, elapsed float64) {
 	_m.Called(platform, elapsed)
+}
+
+// ObserveMobileClientSessionMetadata provides a mock function with given fields: version, platform, value, notificationDisabled
+func (_m *MetricsInterface) ObserveMobileClientSessionMetadata(version string, platform string, value float64, notificationDisabled string) {
+	_m.Called(version, platform, value, notificationDisabled)
 }
 
 // ObserveMobileClientTeamSwitchDuration provides a mock function with given fields: platform, elapsed

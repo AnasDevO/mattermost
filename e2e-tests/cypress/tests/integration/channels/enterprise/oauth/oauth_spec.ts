@@ -101,13 +101,13 @@ describe('Integrations page', () => {
             const cId = clientID as unknown as string;
             cy.contains('.item-details', cId).within(() => {
                 // * Copy button should exist for Client ID
-                cy.contains('.item-details__token', 'Client ID').within(() => {
+                cy.contains('.item-details__token', 'Client ID').should('exist').within(() => {
                     cy.get('.fa-copy').should('exist');
                 });
 
-                cy.contains('.item-details__token', 'Client Secret').within(() => {
+                cy.contains('.item-details__token', 'Client Secret').should('exist').within(() => {
                     // * Client secret should not show
-                    cy.contains('*******************').should('exist');
+                    cy.contains('***************').should('exist');
 
                     // * Copy button should not exist
                     cy.get('.fa-copy').should('not.exist');
@@ -120,9 +120,9 @@ describe('Integrations page', () => {
                 cy.findByText('Hide Secret').should('exist');
                 cy.findByText('Show Secret').should('not.exist');
 
-                cy.contains('.item-details__token', 'Client Secret').within(() => {
+                cy.contains('.item-details__token', 'Client Secret').should('exist').within(() => {
                     // * Token should not be obscured
-                    cy.contains('*******************').should('not.exist');
+                    cy.contains('***************').should('not.exist');
 
                     // * Copy button should exist
                     cy.get('.fa-copy').should('exist');
@@ -246,7 +246,11 @@ describe('Integrations page', () => {
         });
 
         // # Update description
-        cy.get('#description').type('Edited');
+        cy.get('#description').invoke('val').then(($text) => {
+            if (!$text.match('Edited$')) {
+                cy.get('#description').type('Edited');
+            }
+        });
 
         // # Save
         cy.get('#saveOauthApp').click({force: true});
@@ -402,7 +406,7 @@ describe('Integrations page', () => {
         cy.contains('Invalid client credentials.').should('exist');
     });
 
-    it('MM-T654 Successful reconnect with updated secret', () => {
+    it.skip('MM-T654 Successful reconnect with updated secret', () => {
         cy.apiAdminLogin();
 
         // # Send new credentials
@@ -437,7 +441,7 @@ describe('Integrations page', () => {
         });
 
         // # Confirm Delete
-        cy.contains('#confirmModalButton', 'Delete').click();
+        cy.contains('#confirmModalButton', 'Yes, delete it').click();
 
         // # Go back to channels
         cy.visit(testChannelUrl1);

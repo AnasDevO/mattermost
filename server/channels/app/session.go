@@ -68,8 +68,8 @@ func (a *App) GetCloudSession(token string) (*model.Session, *model.AppError) {
 }
 
 func (a *App) GetRemoteClusterSession(token string, remoteId string) (*model.Session, *model.AppError) {
-	rc, appErr := a.GetRemoteCluster(remoteId)
-	if appErr == nil && rc.DeleteAt == 0 && subtle.ConstantTimeCompare([]byte(rc.Token), []byte(token)) == 1 {
+	rc, appErr := a.GetRemoteCluster(remoteId, false)
+	if appErr == nil && subtle.ConstantTimeCompare([]byte(rc.Token), []byte(token)) == 1 {
 		// Need a bare-bones session object for later checks
 		session := &model.Session{
 			Token:   token,
@@ -221,10 +221,6 @@ func (a *App) RevokeSessionsFromAllUsers() *model.AppError {
 	}
 
 	return nil
-}
-
-func (a *App) ReturnSessionToPool(session *model.Session) {
-	a.ch.srv.platform.ReturnSessionToPool(session)
 }
 
 func (a *App) ClearSessionCacheForUser(userID string) {
